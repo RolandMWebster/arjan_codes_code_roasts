@@ -102,13 +102,14 @@ class Game:
                 self.winner = player
         self.guesses -= 1
 
-    def play(self) -> None:
+    def play(self) -> str:
+        """Plays a game of battleships and returns a string with the result of the
+        game."""
         while not self.is_finished:
             self._play_round()
         if not self.winner:
-            print("Nobody won the game!")
-            return None
-        print(f"{self.winner.name} won the game!")
+            return "Nobody won the game!"
+        return f"{self.winner.name} won the game!"
 
 
 def get_user_guess(max_x: int, max_y: int) -> tuple[int, int]:
@@ -156,7 +157,8 @@ def main():
         board.add_ship(x=x, y=y)
     players = get_players()
     game = Game(board=board, players=players, guesses=GUESSES)
-    game.play()
+    result = game.play()
+    print(result)
 
 
 if __name__ == "__main__":
